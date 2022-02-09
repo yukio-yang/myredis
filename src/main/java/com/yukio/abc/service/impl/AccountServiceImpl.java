@@ -39,4 +39,8 @@ public class AccountServiceImpl extends ServiceImpl<AccountMapper, Account> impl
 				.eq(account.getBalance() > 0, Account::getBalance, account.getBalance())
 				.page(new Page<>(account.getPageNum(), account.getPageSize()));
 	}
+
+	public void test() {
+		System.out.println("测试");
+	}
 }
