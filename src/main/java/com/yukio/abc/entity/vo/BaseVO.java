@@ -3,9 +3,6 @@ package com.yukio.abc.entity.vo;
 import lombok.Data;
 
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Past;
-import java.util.Date;
-import java.util.List;
 
 @Data
 public class BaseVO {
@@ -13,10 +10,10 @@ public class BaseVO {
     private Long pageSize = 10L;
     @NotNull
     private Long pageNum = 1L;
-    @Past
-    private Date startTime;
-    @Past
-    private Date endTime;
-
-    private List<Long> ids;
+//    @Past
+//    private Date startTime;
+//    @Past
+//    private Date endTime;
+//
+//    private List<Long> ids;
 }
