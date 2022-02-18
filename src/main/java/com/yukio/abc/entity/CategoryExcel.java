@@ -4,6 +4,7 @@ import com.alibaba.excel.annotation.ExcelIgnoreUnannotated;
 import com.alibaba.excel.annotation.ExcelProperty;
 import com.alibaba.excel.annotation.write.style.ColumnWidth;
 import com.alibaba.excel.annotation.write.style.ContentRowHeight;
+import com.alibaba.excel.metadata.BaseRowModel;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -14,7 +15,6 @@ import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
 import java.io.Serializable;
-import java.time.LocalDateTime;
 import java.util.Date;
 
 /**
@@ -27,11 +27,11 @@ import java.util.Date;
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
-//@Accessors(chain = true)//跟easyExcel冲突导致读到的数据全为null(如果不去掉则需手动加上@Getter和@Setter注解)
+//@Accessors(chain = true)
 @ExcelIgnoreUnannotated//easy排除未标记的选项(或字段上使用@ExcelIgnore)
-@ContentRowHeight(20)//设ExcelProperty置行高
+@ContentRowHeight(20)//设置行高
 @ToString
-public class Category implements Serializable {
+public class CategoryExcel extends BaseRowModel implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -48,9 +48,9 @@ public class Category implements Serializable {
     private Long parentId;
 
     /**
-     * 路径,converter = MyStringImageConverter.class
+     * 路径
      */
-    @ExcelProperty(value = "路径",index = 0) //SetConsumeDiscernLogURLConverter
+    @ExcelProperty(value = "路径",index = 0)//,converter = SetConsumeDiscernLogURLConverter.class
     @ColumnWidth(30)
     private String path;
 
@@ -75,24 +75,23 @@ public class Category implements Serializable {
      * 状态：0/下架 1/上架
      */
     @ApiModelProperty(value = "状态(1_上架,0_下架)" )
-    @ExcelProperty(value = "状态",index = 2,converter = SetConsumePayTypeConverter.class)//
+    @ExcelProperty(value = "状态",index = 2,converter = SetConsumePayTypeConverter.class)
     @ColumnWidth(30)
     private Integer state;
 
     /**
      * 创建时间
      */
-    @ExcelProperty(value = "创建时间",index = 3) //, converter = LocalDateTimeConverter.class
+    @ExcelProperty(value = "创建时间",index = 3)
     @ColumnWidth(30)
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
-    private Date createTime; //LocalDateTime
+    private Date createTime;
 
     /**
      * 更新时间
      */
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
-    private LocalDateTime updateTime;
-
+    private Date updateTime;
 
 
 }
